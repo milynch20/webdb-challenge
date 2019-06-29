@@ -1,20 +1,22 @@
 const express = require('express');
 const helmet = require('helmet');
 
-//CHANGE THIS
-const tracksRouter = require('../tracks/tracks-router.js');
+const actionRouter = require('../routers/action-router.js');
+const projectRouter = require('../routers/project-router.js');
 
 const server = express();
 
-server.use(helmet());
 server.use(express.json());
+server.use(helmet());
 
-//CHANGE THIS
-server.use('/api/', tracksRouter);
+server.use('/api/action', actionRouter);
+server.use('/api/project', projectRouter);
 
-// sanity check route
+
+//check
 server.get('/', (req, res) => {
-  res.status(200).json({ hello: 'World!' });
+  res.send('Hello World!')
 });
+
 
 module.exports = server;
